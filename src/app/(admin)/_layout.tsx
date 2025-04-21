@@ -12,7 +12,7 @@ function TabBarIcon(props: {
    name: React.ComponentProps<typeof FontAwesome>["name"];
    color: string;
 }) {
-   return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+   return <FontAwesome size={20} style={{ marginBottom: -3 }} {...props} />;
 }
 
 export default function TabLayout() {
@@ -21,47 +21,36 @@ export default function TabLayout() {
    return (
       <Tabs
          screenOptions={{
-            tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+            tabBarStyle: {
+               backgroundColor: Colors.light.tint,
+            },
+            tabBarInactiveTintColor: Colors.light.background,
+            tabBarActiveTintColor: "gainsboro",
             // Disable the static render of the header on web
             // to prevent a hydration error in React Navigation v6.
             headerShown: useClientOnlyValue(false, true),
          }}
       >
          <Tabs.Screen
-            name="index"
+            name="menu"
             options={{
-               title: "Tab One",
+               title: "Menu",
+               headerShown: false,
                tabBarIcon: ({ color }) => (
-                  <TabBarIcon name="code" color={color} />
-               ),
-               headerRight: () => (
-                  <Link href="/modal" asChild>
-                     <Pressable>
-                        {({ pressed }) => (
-                           <FontAwesome
-                              name="info-circle"
-                              size={25}
-                              color={Colors[colorScheme ?? "light"].text}
-                              style={{
-                                 marginRight: 15,
-                                 opacity: pressed ? 0.5 : 1,
-                              }}
-                           />
-                        )}
-                     </Pressable>
-                  </Link>
+                  <TabBarIcon name="cutlery" color={color} />
                ),
             }}
          />
          <Tabs.Screen
             name="two"
             options={{
-               title: "Tab Two",
+               title: "Order",
                tabBarIcon: ({ color }) => (
-                  <TabBarIcon name="code" color={color} />
+                  <TabBarIcon name="list" color={color} />
                ),
             }}
          />
+         <Tabs.Screen name="index" options={{ href: null }} />
       </Tabs>
-   );
+   )
 }

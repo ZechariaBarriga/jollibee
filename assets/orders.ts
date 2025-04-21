@@ -1,4 +1,4 @@
-import { jollibeeMenu } from "./products";
+import { products } from "./products";
 
 interface OrderItem {
    productId: number;
@@ -20,7 +20,7 @@ interface JollibeeOrder {
 
 function calculateOrderTotal(items: OrderItem[]): number {
    return items.reduce((total, item) => {
-      const product = jollibeeMenu.find((p) => p.id === item.productId);
+      const product = products.find((p) => p.id === item.productId);
       return total + (product ? product.price * item.quantity : 0);
    }, 0);
 }
